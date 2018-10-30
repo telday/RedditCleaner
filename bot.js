@@ -41,6 +41,7 @@ client.on('message', msg => {
 	rp({uri:url, json:true, raw_json:1})
 		.then(function(res) {
 			console.log(res['data'].children[0].data.url);
+			msg.channel.send("FTFY " + res['data'].children[0].data.url, {reply:msg.author});
 		})
 		.catch(function(res) {
 			console.log('fail');
