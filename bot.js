@@ -16,12 +16,13 @@ function extractThreadName(text){
 	let pattern = new RegExp("(comments\/*)[a-z A-Z 0-9]+");
 	let pattern2 = new RegExp("(\/)[a-z A-Z 0-9]+");
 	let matching = text.match(pattern);
+
 	if (!matching){
 		return -1;
 	}
 	matching = matching[0].match(pattern2)[0];
 	matching = matching.slice(1);
-	console.log(matching);
+
 	return matching;
 }
 
