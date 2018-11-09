@@ -31,6 +31,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+	let reddit_embed = new RegExp("(v.redd.it)*")
 	// Checks if the link was to reddit and gets the reddit posts name
 	let name = extractThreadName(msg.content);
 	if (name == -1){
@@ -40,7 +41,8 @@ client.on('message', msg => {
 
 	rp({uri:url, json:true, raw_json:1})
 		.then(function(res) {
-			if(res['data'].children[0].data.url != msg.content){
+			var result = res['data'].children[0].data.url;
+			if(result != msg.content && !(result.match(reddit_embed) === null)){
 				msg.channel.send("FTFY " + res['data'].children[0].data.url, {reply:msg.author});
 			}
 		})
