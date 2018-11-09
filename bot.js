@@ -1,6 +1,6 @@
-const Discord = require('discord.js');
+const Discord = require('/usr/lib/node_modules/discord.js');
 const fs = require('fs');
-const rp = require('request-promise');
+const rp = require('/usr/lib/node_modules/request-promise');
 const client = new Discord.Client();
 
 /**
@@ -40,11 +40,12 @@ client.on('message', msg => {
 
 	rp({uri:url, json:true, raw_json:1})
 		.then(function(res) {
-			console.log(res['data'].children[0].data.url);
-			msg.channel.send("FTFY " + res['data'].children[0].data.url, {reply:msg.author});
+			if(res['data'].children[0].data.url != msg.content){
+				msg.channel.send("FTFY " + res['data'].children[0].data.url, {reply:msg.author});
+			}
 		})
 		.catch(function(res) {
-			console.log('fail');
+			console.log('Failure: ' + res);
 		});
 });
 
